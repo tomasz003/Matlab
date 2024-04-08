@@ -1,0 +1,47 @@
+[System]
+Name='cisnienie'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='wiek'
+Range=[15 60]
+NumMFs=3
+MF1='młody':'gaussmf',[9 15]
+MF2='średni':'gaussmf',[6 37.5]
+MF3='starszy':'gaussmf',[9 60]
+
+[Input2]
+Name='ciśnienie'
+Range=[110 150]
+NumMFs=3
+MF1='niskie':'gaussmf',[6 110]
+MF2='średnie':'gauss2mf',[3.737 124.9 3.737 135.1]
+MF3='wysokie':'gaussmf',[6 150]
+
+[Output1]
+Name='wynik'
+Range=[-10 10]
+NumMFs=3
+MF1='podciśnienie':'trimf',[-18.34 -10 -1.65]
+MF2='normalne':'trimf',[-8.35 0 8.35]
+MF3='nadciśnienie':'trimf',[1.65 10 18.35]
+
+[Rules]
+1 1, 2 (1) : 1
+1 2, 2 (1) : 1
+1 3, 3 (1) : 1
+2 1, 1 (1) : 1
+2 2, 2 (1) : 1
+2 3, 3 (1) : 1
+3 1, 1 (1) : 1
+3 2, 2 (1) : 1
+3 3, 2 (1) : 1
